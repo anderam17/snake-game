@@ -77,10 +77,19 @@ function draw() {
           if(didEatFood(value.x, value.y)){
             console.log("yay food");
             score++;
-            $("#score").text(score)
+            $("#score").text(score);
+            makeSnakeBigger();
           }
       }
     });
+  };
+
+  //adds a link to the snake
+  function makeSnakeBigger() {
+    snake.push({
+        x: snake[snake.length - 1].oldX,
+        y: snake[snake.length - 1].oldY
+    })
   };
 
   //checks if head of snake is at same position as food
