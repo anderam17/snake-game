@@ -21,10 +21,11 @@ function draw() {
   const DOWN = 40;
 
   var keyPressed = DOWN;
+  var score = 0;
 
 
   //setInterval(what you will do, how often you will do it);
-  setInterval(gameLoop, 1000);
+  setInterval(gameLoop, 150);
 
   //function to move snake
   function gameLoop(){
@@ -72,8 +73,20 @@ function draw() {
     //   making outline color and location/sizes
       ctx.strokeStyle = "white";
       ctx.strokeRect(value.x, value.y, snakeWidth, snakeHeight);
+      if (index === 0){
+          if(didEatFood(value.x, value.y)){
+            console.log("yay food");
+            score++;
+            $("#score").text(score)
+          }
+      }
     });
   };
+
+  //checks if head of snake is at same position as food
+  function didEatFood(x, y){
+    return food.x === x && food.y === y;
+  }
 
   function drawFood() {
     ctx.fillStyle = "rgb(0, 200, 0)";
