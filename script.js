@@ -77,6 +77,7 @@ function draw() {
       if (index === 0){
           if(collided(value.x, value.y)){
               console.log("game over");
+              gameOver();
           }
           if(didEatFood(value.x, value.y)){
             console.log("yay food");
@@ -88,7 +89,7 @@ function draw() {
     });
   };
 
-  //checks if snake collided with self
+  //checks if snake collided with self or canvas borders
   function collided(x, y) {
     return snake.filter(function(value, index) {
         return index != 0 && value.x === x && value.y === y;
@@ -119,7 +120,7 @@ function draw() {
   };
 
   function gameOver(){
-
+    clearInterval(game);
   };
 
   $(document).keydown(function(e){
