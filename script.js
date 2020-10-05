@@ -76,4 +76,9 @@ function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
+  $(document).keydown(function(e){
+      keyPressed = e.which;
+      console.log(keyPressed);
+  })
+
 }
