@@ -11,6 +11,15 @@ function draw() {
 
   //setting snakeWidth and snakeHeight both to 10
   var snakeWidth = (snakeHeight = 10);
+  var blockSize = 10;
+
+  const LEFT = 37;
+  const UP = 38;
+  const RIGHT = 39;
+  const DOWN = 40;
+
+  var keyPressed = DOWN;
+
 
   //setInterval(what you will do, how often you will do it);
   setInterval(gameLoop, 1000);
@@ -18,13 +27,29 @@ function draw() {
   //function to move snake
   function gameLoop(){
       //call drawSnake function
+      moveSnake();
       drawSnake();
       console.log("game running")
-
   }
 
   function moveSnake() {
-      
+    $.each(snake, function (index, value) {
+        //if the index is 0, that means this is the head of the snake
+       if(index === 0){
+        if (keyPressed === DOWN){
+            snake[index].y = value.y + blockSize;
+        }else if (keyPressed === UP){
+
+        }else if (keyPressed === RIGHT){
+            
+        }else if (keyPressed === LEFT){
+            
+        }
+        //else it is the body of the snake
+       }else {
+
+       }
+    });
   }
 
 
