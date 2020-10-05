@@ -43,11 +43,11 @@ function draw() {
         if (keyPressed === DOWN){
             snake[index].y = value.y + blockSize;
         }else if (keyPressed === UP){
-
+            snake[index].y = value.y - blockSize;
         }else if (keyPressed === RIGHT){
-            
+            snake[index].x = value.x + blockSize;
         }else if (keyPressed === LEFT){
-            
+            snake[index].x = value.x - blockSize;
         }
         //else it is the body of the snake
        }else {
