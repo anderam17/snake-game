@@ -12,8 +12,21 @@ function draw() {
   //setting snakeWidth and snakeHeight both to 10
   var snakeWidth = (snakeHeight = 10);
 
-  //call drawSnake function
-  drawSnake();
+  //setInterval(what you will do, how often you will do it);
+  setInterval(gameLoop, 1000);
+
+  //function to move snake
+  function gameLoop(){
+      //call drawSnake function
+      drawSnake();
+      console.log("game running")
+
+  }
+
+  function moveSnake() {
+      
+  }
+
 
   //draws each section of the snake using the values in the snake array
   function drawSnake() {
