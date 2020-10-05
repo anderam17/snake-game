@@ -84,6 +84,7 @@ function draw() {
             score++;
             $("#score").text(score);
             makeSnakeBigger();
+            food.eaten = true;
           }
       }
     });
@@ -112,8 +113,46 @@ function draw() {
 
   function drawFood() {
     ctx.fillStyle = "rgb(0, 200, 0)";
+    if (food.eaten) {
+        food = getNewPositionForFood();
+    }
     ctx.fillRect(food.x, food.y, blockSize, blockSize);
   };
+
+  function getNewPositionForFood() {
+    let xArr =  yArr = [], xy;
+    $.each(snake, function(index, value) {
+        if($.inArray(value.x, xArr) != -1){
+            xArr.push(value.x);
+        }
+        if($.inArray(value.y, yArr) != -1){
+            yArr.push(value.y)
+        }
+    });
+    xy = getEmptyXY(xArr, yArr);
+    return xy;
+  };
+
+  function getEmptyXY(xArr, yArr){
+    let newX, newY;
+    newX = getRandomNumber(canvas.width - 10, 10);
+    newY = getRandomNumber(canvas.height - 10, 10);
+    if($.inArray(newX, xArr) === -1 && $.inArray(newY, yArr) === -1){
+        return {
+            x: newX,
+            y: newY,
+            eaten: false
+        }
+    }else {
+        return getEmptyXY(xArr, yArr);
+    }
+  };
+
+  function getRandomNumber(max, multipleOf){
+    let result = Math.floor(Math.random() * max);
+    result = (result % 10 === 0) ? result : result + (multipleOf - result % 10);
+    return result;
+  }
 
   function clearCanvas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
