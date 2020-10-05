@@ -51,7 +51,9 @@ function draw() {
         }
         //else it is the body of the snake
        }else {
-
+           //set the x and y values to the old x and y values of the block before it in the array(or line)
+        snake[index].x = snake[index-1].oldX;
+        snake[index].y = snake[index-1].oldY;
        }
     });
   }
