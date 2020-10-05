@@ -9,6 +9,8 @@ function draw() {
     { x: 50, y: 80, oldX: 0, oldY: 0 },
   ];
 
+  var food = {x: 200, y: 200, eaten: false};
+
   //setting snakeWidth and snakeHeight both to 10
   var snakeWidth = (snakeHeight = 10);
   var blockSize = 10;
@@ -29,6 +31,7 @@ function draw() {
       //call drawSnake function
       clearCanvas();
       moveSnake();
+      drawFood();
       drawSnake();
       console.log("game running")
   }
@@ -70,14 +73,21 @@ function draw() {
       ctx.strokeStyle = "white";
       ctx.strokeRect(value.x, value.y, snakeWidth, snakeHeight);
     });
-  }
+  };
+
+  function drawFood() {
+    ctx.fillStyle = "rgb(0, 200, 0)";
+    ctx.fillRect(food.x, food.y, blockSize, blockSize);
+  };
 
   function clearCanvas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
   $(document).keydown(function(e){
-      keyPressed = checkKeyIsAllowed(e.which);
+      if ($.inArray(e.which, [DOWN, UP, LEFT, RIGHT]) != -1){
+          keyPressed = checkKeyIsAllowed(e.which);
+      }
   })
 
   function checkKeyIsAllowed(tempKey){
