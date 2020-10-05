@@ -4,9 +4,9 @@ function draw() {
 
   //just an array holding the x and y coordinates for all segments in our snake
   var snake = [
-    { x: 50, y: 100 },
-    { x: 50, y: 90 },
-    { x: 50, y: 80 },
+    { x: 50, y: 100, oldX: 0, oldY: 0 },
+    { x: 50, y: 90, oldX: 0, oldY: 0 },
+    { x: 50, y: 80, oldX: 0, oldY: 0 },
   ];
 
   //setting snakeWidth and snakeHeight both to 10
@@ -27,6 +27,7 @@ function draw() {
   //function to move snake
   function gameLoop(){
       //call drawSnake function
+      clearCanvas();
       moveSnake();
       drawSnake();
       console.log("game running")
@@ -34,6 +35,9 @@ function draw() {
 
   function moveSnake() {
     $.each(snake, function (index, value) {
+        snake[index].oldX = value.x;
+        snake[index].oldY = value.y;
+
         //if the index is 0, that means this is the head of the snake
        if(index === 0){
         if (keyPressed === DOWN){
@@ -65,4 +69,9 @@ function draw() {
       ctx.strokeRect(value.x, value.y, snakeWidth, snakeHeight);
     });
   }
+
+  function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
 }
