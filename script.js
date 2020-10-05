@@ -22,10 +22,11 @@ function draw() {
 
   var keyPressed = DOWN;
   var score = 0;
+  var game;
 
 
   //setInterval(what you will do, how often you will do it);
-  setInterval(gameLoop, 150);
+  game = setInterval(gameLoop, 150);
 
   //function to move snake
   function gameLoop(){
@@ -74,6 +75,9 @@ function draw() {
       ctx.strokeStyle = "white";
       ctx.strokeRect(value.x, value.y, snakeWidth, snakeHeight);
       if (index === 0){
+          if(collided(value.x, value.y)){
+              console.log("game over");
+          }
           if(didEatFood(value.x, value.y)){
             console.log("yay food");
             score++;
@@ -82,6 +86,14 @@ function draw() {
           }
       }
     });
+  };
+
+  //checks if snake collided with self
+  function collided(x, y) {
+    return snake.filter(function(value, index) {
+        return index != 0 && value.x === x && value.y === y;
+        //what is this .length?
+    }).length > 0 || x < 0 || x > canvas.width || y < 0 || y > canvas.height;
   };
 
   //adds a link to the snake
@@ -104,7 +116,11 @@ function draw() {
 
   function clearCanvas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }
+  };
+
+  function gameOver(){
+
+  };
 
   $(document).keydown(function(e){
       if ($.inArray(e.which, [DOWN, UP, LEFT, RIGHT]) != -1){
